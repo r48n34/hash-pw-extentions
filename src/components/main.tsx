@@ -1,33 +1,29 @@
 import { useState } from "react"
-import { Button, Textarea, PasswordInput, Grid } from '@mantine/core';
 import { useForm } from '@mantine/form';
-
-import { IconCheck, IconCopy } from "@tabler/icons";
+import { Button, Textarea, PasswordInput, Grid } from '@mantine/core';
 import CopyTextIcon from "./CopyTextIcon";
 import sha256 from 'crypto-js/sha256';
+import toast, { Toaster } from "react-hot-toast";
 
 export function Main({ name = "Extension" }) {
-  
-    const [ domain, setDomain ] = useState<string>("");
-    const [ password, setPassword ] = useState<string>("");
+
+    const [ hashedPassword, setHashedPassword ] = useState<string>("");
 
     const form = useForm({
         initialValues: {
             domain: "https://www.google.com/",
             password: "",
         },
-    
         validate: {
             domain: (value) => (value.length >= 1) ? null : 'Invalid domain',
             password: (value) => (value.length >= 1) ? null : 'Invalid password',
         },
     });
 
-    const [ hashedPassword, setHashedPassword ] = useState<string>("");
-
     function hashPw(values: {domain: string, password: string}){
         let finalStr = values.domain.trim() + values.password
-        setHashedPassword(sha256(finalStr))
+        setHashedPassword(sha256(finalStr));
+        toast.success('Successfully to hash!')
     }
 
     return (
@@ -39,6 +35,8 @@ export function Main({ name = "Extension" }) {
                 width: "300px"
             }}
         >
+            <div><Toaster/></div>
+            
             <form onSubmit={form.onSubmit((values) => hashPw(values))}>
             <Textarea 
                 label="Domain"
@@ -77,7 +75,3 @@ export function Main({ name = "Extension" }) {
         </div>
     )
 }
-
-
-// 76d442f15d4e25707c0746162d4c415db2480560bb775308549a6f06f3d7354e
-// 76d442f15d4e25707c0746162d4c415db2480560bb775308549a6f06f3d7354e

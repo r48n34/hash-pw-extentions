@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { useForm } from '@mantine/form';
-import { Button, Textarea, PasswordInput, Grid } from '@mantine/core';
+import { Button, Textarea, PasswordInput, Grid, Text, Badge, Group } from '@mantine/core';
 import CopyTextIcon from "./CopyTextIcon";
 import sha256 from 'crypto-js/sha256';
 import toast, { Toaster } from "react-hot-toast";
+import { MantineProvider } from '@mantine/core';
 
 export function Main({ name = "Extension" }) {
 
@@ -11,7 +12,7 @@ export function Main({ name = "Extension" }) {
 
     const form = useForm({
         initialValues: {
-            domain: "https://www.google.com/",
+            domain: "www.google.com",
             password: "",
         },
         validate: {
@@ -27,33 +28,47 @@ export function Main({ name = "Extension" }) {
     }
 
     return (
-        <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 16,
-                width: "300px"
-            }}
-        >
-            <div><Toaster/></div>
+        <MantineProvider theme={{ colorScheme: 'dark' }} withGlobalStyles withNormalizeCSS>
+        <div><Toaster/></div>
+
+        <div style={{ padding: 12, width: "300px"}} >
+
+            <Group position="center" mb={6}>
+                <Badge 
+                    size="lg"
+                    variant="gradient"
+                    gradient={{ from: 'indigo', to: 'cyan' }}
+                >
+                    Password Hasher
+                </Badge>
+            </Group>
             
             <form onSubmit={form.onSubmit((values) => hashPw(values))}>
-            <Textarea 
-                label="Domain"
-                withAsterisk
-                minRows={2}
-                {...form.getInputProps('domain')}
-            />
+                <Textarea 
+                    label="Domain"
+                    withAsterisk
+                    minRows={2}
+                    {...form.getInputProps('domain')}
+                />
 
-            <PasswordInput 
-                label="Password"
-                withAsterisk 
-                placeholder="Password" 
-                mt={6}
-                {...form.getInputProps('password')}
-            />
+                <PasswordInput 
+                    label="Password"
+                    withAsterisk 
+                    placeholder="Password" 
+                    mt={6}
+                    {...form.getInputProps('password')}
+                />
 
-            <Button mt={20} type="submit">Encode</Button>
+                <Button 
+                    mt={20} 
+                    variant="gradient" 
+                    gradient={{ from: 'indigo', to: 'cyan', deg: 60 }} 
+                    fullWidth 
+                    type="submit"
+                >
+                    Encode
+                </Button>
+
             </form>
 
             { hashedPassword !== "" && (
@@ -73,5 +88,6 @@ export function Main({ name = "Extension" }) {
             )}
             
         </div>
+        </MantineProvider>
     )
 }

@@ -1,7 +1,7 @@
 import { Main } from "~components/main"
 
 function IndexPage() {
-  return <Main name="App" />
+  return (<Main name="App" />)
 }
 
 export default IndexPage

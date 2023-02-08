@@ -1,3 +1,5 @@
+// https://stackoverflow.com/questions/59777670/how-can-i-hash-a-string-with-sha256-in-js
+
 export var sha256 = function sha256(ascii) {
 	function rightRotate(value, amount) {
 		return (value>>>amount) | (value<<(32 - amount));

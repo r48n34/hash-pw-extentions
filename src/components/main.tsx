@@ -1,14 +1,12 @@
 import { useState } from "react"
 import { useForm } from '@mantine/form';
-import { Button, Textarea, PasswordInput, Grid, Select, Badge, Group } from '@mantine/core';
-import CopyTextIcon from "./CopyTextIcon";
-import sha256 from 'crypto-js/sha256';
-// import { sha256 } from "~utilis/sha256";
+import { MantineProvider, Button, Textarea, PasswordInput, Grid, Select, Badge, Group } from '@mantine/core';
 
 import toast, { Toaster } from "react-hot-toast";
-import { MantineProvider } from '@mantine/core';
-// import { IconXboxX } from "@tabler/icons";
 
+// import sha256 from 'crypto-js/sha256';
+import { sha256 } from "~utilis/sha256";
+import CopyTextIcon from "./CopyTextIcon";
 
 export function Main({ name = "Extension" }) {
 
@@ -126,8 +124,3 @@ export function Main({ name = "Extension" }) {
     }
 
 }
-
-// 89a1fe75eb7b02031bd6904375b71b4829d6568bfb24dfba982b09ad4e3fe462
-
-// 89a1fe75eb7b02031bd6904375b71b4829d6568bfb24dfba982b09ad4e3fe462
-// 89a1fe75eb7b02031bd6904375b71b4829d6568bfb24dfba982b09ad4e3fe462

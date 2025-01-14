@@ -18,9 +18,7 @@ export default function App(props: any) {
                     colorScheme: 'light',
                 }}
             >
-
                 <Component {...pageProps} />
-
             </MantineProvider>
         </>
     );
